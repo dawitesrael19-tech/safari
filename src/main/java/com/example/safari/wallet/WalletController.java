@@ -30,6 +30,7 @@ public class WalletController {
 	}
 
 	/*updates here */
+
 	@PutMapping("/v1/wallets/{walletId}/status")
 	StatusChange setStatus(@PathVariable String walletId, @RequestBody StatusRequest request) {
 		if (!"ACTIVE".equals(request.status()) && !"FROZEN".equals(request.status())) {

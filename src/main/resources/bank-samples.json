@@ -1,0 +1,10 @@
+[
+  { "payout_id": "P-S001", "bank_account": "ACC-001", "amount": 5000,  "status": "SUCCEEDED", "bank_ref": "BR1A2B3C4D5E6F7A01" },
+  { "payout_id": "P-S002", "bank_account": "ACC-002", "amount": 12000, "status": "SUCCEEDED", "bank_ref": "BR1A2B3C4D5E6F7A02" },
+  { "payout_id": "P-S003", "bank_account": "ACC-003", "amount": 7500,  "status": "FAILED",    "bank_ref": "BR1A2B3C4D5E6F7A03" },
+  { "payout_id": "P-S004", "bank_account": "ACC-004", "amount": 3000,  "status": "REJECTED",  "bank_ref": null },
+  { "payout_id": "P-S005", "bank_account": "ACC-005", "amount": 20000, "status": "SUCCEEDED", "bank_ref": "BR1A2B3C4D5E6F7A05" },
+  { "payout_id": "P-S006", "bank_account": "ACC-006", "amount": 1500,  "status": "FAILED",    "bank_ref": "BR1A2B3C4D5E6F7A06" },
+  { "payout_id": "P-S007", "bank_account": "ACC-001", "amount": 50000, "status": "SUCCEEDED", "bank_ref": "BR1A2B3C4D5E6F7A07" },
+  { "payout_id": "P-S008", "bank_account": "ACC-007", "amount": 2500,  "status": "REJECTED",  "bank_ref": null }
+]

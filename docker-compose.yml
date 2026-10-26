@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: mpesa
+      POSTGRES_USER: mpesa
+      POSTGRES_PASSWORD: mpesa
+    ports:
+      - "5432:5432"

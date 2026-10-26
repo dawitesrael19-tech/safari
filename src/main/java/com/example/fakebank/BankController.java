@@ -1,5 +1,6 @@
 package com.example.fakebank;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -56,6 +57,16 @@ class BankController {
 	@PostMapping("/admin/reset")
 	void reset() {
 		bank.reset();
+	}
+
+	@PostMapping("/admin/samples")
+	Map<String, Object> loadSamples() throws Exception {
+		return Map.of("loaded", bank.loadSamples(), "total_paid", bank.totalPaid());
+	}
+
+	@GetMapping("/admin/payouts")
+	List<Map<String, Object>> payouts() {
+		return bank.payouts();
 	}
 
 	@GetMapping("/admin/stats")

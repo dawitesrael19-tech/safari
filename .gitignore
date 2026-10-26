@@ -36,4 +36,3 @@ build/
 inst.md
 
 .mvn/
-**/com/example/safari/
