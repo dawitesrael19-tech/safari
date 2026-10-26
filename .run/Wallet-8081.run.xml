@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Wallet 8081" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="safari" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.safari.SafariApplication" />
+    <option name="PROGRAM_PARAMETERS" value="--server.port=8081" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

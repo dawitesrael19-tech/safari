@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All services" type="CompoundRunConfigurationType">
+    <toRun name="Fake Bank 9090" type="SpringBootApplicationConfigurationType" />
+    <toRun name="Wallet 8081" type="SpringBootApplicationConfigurationType" />
+    <toRun name="Wallet 8082" type="SpringBootApplicationConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>

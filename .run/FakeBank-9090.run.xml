@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Fake Bank 9090" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="safari" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.fakebank.FakeBankApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

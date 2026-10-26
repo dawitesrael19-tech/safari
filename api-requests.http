@@ -1,0 +1,186 @@
+### I used these to test some of the api endpoints even if am unable to complete all due to time
+
+### Get wallet balance
+GET http://localhost:8081/mpesa/v1/wallets/W001
+
+### Get receiver wallet balance
+GET http://localhost:8081/mpesa/v1/wallets/W002
+
+### Get merchant wallet balance
+GET http://localhost:8081/mpesa/v1/wallets/M001
+
+### Get frozen wallet
+GET http://localhost:8081/mpesa/v1/wallets/W101
+
+### Unknown wallet returns 404
+GET http://localhost:8081/mpesa/v1/wallets/W999
+
+### Transfer between two wallets
+POST http://localhost:8081/mpesa/v1/p2p/transfers
+Content-Type: application/json
+Idempotency-Key: key-transfer-001
+
+{
+  "from_wallet": "W001",
+  "to_wallet": "W002",
+  "amount": 10000,
+  "reference": "rent-october"
+}
+
+### New transfer, new key
+POST http://localhost:8081/mpesa/v1/p2p/transfers
+Content-Type: application/json
+Idempotency-Key: key-transfer-002
+
+{
+  "from_wallet": "W003",
+  "to_wallet": "W004",
+  "amount": 5000,
+  "reference": "school-fees"
+}
+
+### Same key, different body
+POST http://localhost:8081/mpesa/v1/p2p/transfers
+Content-Type: application/json
+Idempotency-Key: key-transfer-002
+
+{
+  "from_wallet": "W003",
+  "to_wallet": "W004",
+  "amount": 9999,
+  "reference": "school-fees"
+}
+
+### Transfer with insufficient funds
+POST http://localhost:8081/mpesa/v1/p2p/transfers
+Content-Type: application/json
+Idempotency-Key: key-transfer-003
+
+{
+  "from_wallet": "W005",
+  "to_wallet": "W006",
+  "amount": 5000000,
+  "reference": "too-much"
+}
+
+### Transfer from frozen wallet
+POST http://localhost:8081/mpesa/v1/p2p/transfers
+Content-Type: application/json
+Idempotency-Key: key-transfer-004
+
+{
+  "from_wallet": "W101",
+  "to_wallet": "W002",
+  "amount": 1000,
+  "reference": "frozen-sender"
+}
+
+### Transfer to same wallet
+POST http://localhost:8081/mpesa/v1/p2p/transfers
+Content-Type: application/json
+Idempotency-Key: key-transfer-005
+
+{
+  "from_wallet": "W007",
+  "to_wallet": "W007",
+  "amount": 1000,
+  "reference": "same-wallet"
+}
+
+### Reverse transfer T-11016
+POST http://localhost:8081/mpesa/v1/p2p/transfers/T-11016/reversal
+Content-Type: application/json
+
+{
+  "reason": "customer dispute"
+}
+
+### Reverse again returns 409
+POST http://localhost:8081/mpesa/v1/p2p/transfers/T-11016/reversal
+Content-Type: application/json
+
+{
+  "reason": "customer dispute"
+}
+
+### Reverse unknown transfer
+POST http://localhost:8081/mpesa/v1/p2p/transfers/T-1/reversal
+Content-Type: application/json
+
+{
+  "reason": "customer dispute"
+}
+
+### Freeze wallet W030
+PUT http://localhost:8081/mpesa/v1/wallets/W030/status
+Content-Type: application/json
+
+{
+  "status": "FROZEN",
+  "reason": "fraud review"
+}
+
+### Unfreeze wallet W030
+PUT http://localhost:8081/mpesa/v1/wallets/W030/status
+Content-Type: application/json
+
+{
+  "status": "ACTIVE",
+  "reason": "review cleared"
+}
+
+### Get payout P-66f7dcf591ad
+GET http://localhost:8081/mpesa/v1/payouts/P-66f7dcf591ad
+
+### Create payout to bank
+POST http://localhost:8081/mpesa/v1/payouts
+Content-Type: application/json
+Idempotency-Key: key-payout-002
+
+{
+  "wallet_id": "M001",
+  "bank_account": "ACC-002",
+  "amount": 7000
+}
+
+### Payout from frozen wallet
+POST http://localhost:8081/mpesa/v1/payouts
+Content-Type: application/json
+Idempotency-Key: key-payout-003
+
+{
+  "wallet_id": "W102",
+  "bank_account": "ACC-003",
+  "amount": 1000
+}
+
+### Unknown payout returns 404
+GET http://localhost:8081/mpesa/v1/payouts/P-does-not-exist
+
+### Bank total actually paid
+GET http://localhost:9090/bank/admin/stats
+
+### Bank list all payouts
+GET http://localhost:9090/bank/admin/payouts
+
+### Bank view of P-66f7dcf591ad
+GET http://localhost:9090/bank/payouts/P-66f7dcf591ad
+
+### Bank view of sample
+GET http://localhost:9090/bank/payouts/P-S003
+
+### Bank submit payout directly
+POST http://localhost:9090/bank/payouts
+Content-Type: application/json
+
+{
+  "payout_id": "P-manual-1",
+  "bank_account": "ACC-001",
+  "amount": 5000
+}
+
+### Bank current config
+GET http://localhost:9090/bank/admin/config
+
+### Reset wallets, deletes everything
+POST http://localhost:8081/mpesa/internal/reset
